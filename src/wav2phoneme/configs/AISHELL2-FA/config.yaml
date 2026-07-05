@@ -1,0 +1,11 @@
+# Model Config
+# 模型配置
+
+# 预训练 wav2vec 模型路径
+wav2vec_model_path: TencentGameMate/chinese-wav2vec2-large
+
+# 音素类别数
+num_phonemes: 200
+
+# 训练模式: forced_alignment / ctc / interpolate
+mode: forced_alignment

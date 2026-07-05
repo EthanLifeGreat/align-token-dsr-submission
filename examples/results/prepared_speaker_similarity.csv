@@ -1,0 +1,4 @@
+method,similarity
+original,0.800
+align_token_dsr,0.760
+mel_reference,0.740

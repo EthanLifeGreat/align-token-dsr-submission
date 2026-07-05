@@ -1,0 +1,32 @@
+# Train Config
+# 训练配置
+
+# 数据配置（相对于仓库根目录）
+data_dir: data/
+dataset: CDSD  # AISHELL-2 / CSMSC / CDSD
+
+# 训练参数
+learning_rate: 1.0e-5
+effective_batch_size: 128  # 等价 batch size = per_device_bs * num_gpus * accumulation_steps
+num_epochs: 50
+accumulation_steps: 4
+warmup_ratio: 0.1
+lr_scheduler_type: cosine  # cosine 学习率调度
+
+# 保存配置
+exp_name: CDSD-FA
+output_dir: results/wav2phoneme/${exp_name}
+save_steps: 500
+save_total_limit: 2
+
+# 其他
+seed: 42
+fp16: true
+num_workers: 4
+grad_clip: 1.0
+
+# Eval 子集大小（解决 OOM 问题）
+eval_subset_size: 5000
+
+# 微调
+finetune_from_checkpoint: checkpoints/wav2phoneme/AISHELL2-FA

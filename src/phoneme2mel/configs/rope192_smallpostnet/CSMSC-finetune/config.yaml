@@ -1,0 +1,17 @@
+xvector_dim: 192
+num_phonemes: 200
+pad_id: 200
+vocab_size: 201
+d_model: 384
+nhead: 4
+num_layers: 6
+dim_feedforward: 1536
+dropout: 0.1
+max_position_embeddings: 4096
+mel_dim: 128
+postnet_type: legacy
+postnet_n_layers: 5
+postnet_dim: 256
+postnet_kernel_size: 5
+phone_dict_path: data/AISHELL-2-95_5/phone_dict.json
+xvector_backend: eresnet2v2

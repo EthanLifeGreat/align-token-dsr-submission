@@ -1,0 +1,5 @@
+wav_id,spk_id,split,text
+utt000001,spk001,train,dummy transcript one
+utt000002,spk001,val,dummy transcript two
+utt000003,spk002,test,dummy transcript three
+

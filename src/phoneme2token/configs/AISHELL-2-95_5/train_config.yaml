@@ -1,0 +1,25 @@
+data_dir: data/
+dataset: AISHELL-2-95_5
+valid_frames_csv: valid_frames_p2t.csv
+learning_rate: 1.0e-4
+effective_batch_size: 128
+batch_size_unit: sample
+accumulation_steps: 1
+num_epochs: 5
+warmup_ratio: 0.01
+exp_name: AISHELL-2-95_5
+output_dir: results/phoneme2token/${exp_name}
+save_steps: 1000
+save_total_limit: 2
+logging_steps: 20
+eval_accumulation_steps: 100
+seed: 42
+fp16: true
+bf16: false
+tf32: true
+num_workers: 4
+length_bucketing: true
+length_bucket_multiplier: 50
+grad_clip: 1.0
+resume: false
+

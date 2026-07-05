@@ -1,0 +1,15 @@
+# Model Config
+# 模型配置
+
+# 预训练 wav2vec 模型路径
+wav2vec_model_path: TencentGameMate/chinese-wav2vec2-large
+
+# 音素类别数
+num_phonemes: 201
+
+# 训练模式: forced_alignment / ctc / interpolate
+mode: ctc
+phone_dict_path: docs/paper_workspace/backend_alignment_supplement/config_snapshots/phone_dict_ctc_blank200.json
+sil_id: 0
+ctc_blank_id: 200
+ctc_remove_sil: true
