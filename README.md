@@ -19,6 +19,12 @@ prompt waveforms, pretrained model files, or adapted checkpoints are included.
 - `src/align_token_dsr/speaker_conditioning.py`: C0/C1/C2 speaker-conditioning
   anchor selection logic.
 - `src/phoneme2mel`: phoneme-to-mel acoustic reference route.
+- `utils/Tokenizer/s3tokenizer`: CosyVoice semantic-token extraction pipeline
+  used to prepare `s3tokenizer_v2_25hz` token targets.
+- `utils/Mel_Spectrum`: log-mel extraction scripts for the acoustic reference
+  route and vocoder training.
+- `utils/Vocoder/hifigan`: HiFi-GAN inference, training, and generator-weight
+  extraction scripts.
 - `utils/CosyVoice_Token_Services`: thin wrapper for running Token2Wav without
   vendoring CosyVoice2.
 - `utils/WER`, `scripts/compute_cer.py`, `scripts/reproduce_tables.py`, and
@@ -58,8 +64,25 @@ PYTHONPATH=$PWD bash src/phoneme2token/train.sh CSMSC-finetune
 Phoneme-to-mel acoustic reference:
 
 ```bash
-PYTHONPATH=$PWD bash src/phoneme2mel/train.sh rope192_smallpostnet/AISHELL-2-pretrain
-PYTHONPATH=$PWD bash src/phoneme2mel/train.sh rope192_smallpostnet/CSMSC-finetune
+PYTHONPATH=$PWD bash src/phoneme2mel/train.sh rope192_smallpostnet_dropout05/AISHELL-2-pretrain
+PYTHONPATH=$PWD bash src/phoneme2mel/train.sh rope192_smallpostnet_dropout05/CSMSC-finetune
+```
+
+CosyVoice semantic-token extraction:
+
+```bash
+bash utils/Tokenizer/s3tokenizer/pipeline.sh \
+  --model speech_tokenizer_v2_25hz \
+  --datasets AISHELL-2-95_5 CSMSC \
+  --gpus "0,1,2,3"
+```
+
+Mel extraction and HiFi-GAN vocoder training:
+
+```bash
+python utils/Mel_Spectrum/extract_mel.py --dataset CSMSC --project-root "$PWD"
+HIFIGAN_GPUS=0,1 bash utils/Vocoder/hifigan/train/run.sh all
+bash utils/Vocoder/hifigan/run_extract_weights.sh
 ```
 
 ## Rendering and Evaluation
@@ -96,6 +119,6 @@ python scripts/reproduce_tables.py \
 ## Artifact Policy
 
 See `docs/checkpoint_policy.md`. All private or license-restricted checkpoints,
-CDSD-derived labels, speaker embeddings, enrollment prompts, and generated
-reconstruction samples must remain outside this repository.
-
+CDSD-derived labels, tokenizer outputs, mel dumps, speaker embeddings,
+enrollment prompts, vocoder checkpoints, and generated reconstruction samples
+must remain outside this repository.

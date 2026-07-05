@@ -8,7 +8,7 @@ accumulation_steps: 1
 num_epochs: 5
 warmup_ratio: 0.01
 lr_scheduler_type: cosine
-exp_name: rope192_smallpostnet/AISHELL-2-95_5-pretrain
+exp_name: rope192_smallpostnet_dropout05/AISHELL-2-95_5-pretrain
 output_dir: results/phoneme2mel/${exp_name}
 save_steps: 10000
 save_total_limit: 2
@@ -20,6 +20,7 @@ bf16: false
 tf32: true
 num_workers: 8
 persistent_workers: true
+prefetch_factor: 4
 length_bucketing: false
 length_bucket_multiplier: 50
 grad_clip: 1.0

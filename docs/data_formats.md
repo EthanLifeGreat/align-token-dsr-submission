@@ -48,6 +48,19 @@ data/<dataset>/token/s3tokenizer_v2_25hz/<spk_id>/<wav_id>.npy
 ```
 
 Token arrays are not included because they may be dataset-derived artifacts.
+Use `utils/Tokenizer/s3tokenizer` to produce these files from legally obtained
+audio and an externally installed tokenizer.
+
+## Mel Spectrograms
+
+Phoneme-to-mel and HiFi-GAN training use 16 kHz, 128-bin log-mel files:
+
+```text
+data/<dataset>/mel/<spk_id>/<wav_id>.npy
+```
+
+Use `utils/Mel_Spectrum` to extract them when offline mel files are needed.
+Mel dumps are generated artifacts and are not included.
 
 ## Speaker Embeddings
 
@@ -65,3 +78,17 @@ data/<dataset>/xvector/<backend>/<spk_id>.npy
 
 Real embeddings and enrollment prompts are not included.
 
+## Vocoder Checkpoints
+
+HiFi-GAN training writes checkpoints under an untracked result directory such
+as:
+
+```text
+results/vocoder_training/hifigan/bshall_legacy_matched/
+```
+
+Extracted generator weights should be kept under an untracked path such as:
+
+```text
+checkpoints/hifigan/generator-csmsc.pt
+```

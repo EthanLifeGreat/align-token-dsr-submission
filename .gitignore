@@ -9,6 +9,7 @@ __pycache__/
 /data/
 /results/
 /outputs/
+/exp/
 /logs/
 /checkpoints/
 wandb/

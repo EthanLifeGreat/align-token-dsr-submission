@@ -13,5 +13,6 @@ postnet_type: legacy
 postnet_n_layers: 5
 postnet_dim: 256
 postnet_kernel_size: 5
+postnet_dropout: 0.5
 phone_dict_path: data/AISHELL-2-95_5/phone_dict.json
 xvector_backend: eresnet2v2

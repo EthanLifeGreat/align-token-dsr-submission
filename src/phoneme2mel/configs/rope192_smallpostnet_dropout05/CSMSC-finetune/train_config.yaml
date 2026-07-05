@@ -8,7 +8,7 @@ accumulation_steps: 1
 num_epochs: 50
 warmup_ratio: 0.1
 lr_scheduler_type: cosine
-exp_name: rope192_smallpostnet/CSMSC-finetune
+exp_name: rope192_smallpostnet_dropout05/CSMSC-finetune
 output_dir: results/phoneme2mel/${exp_name}
 save_steps: 500
 save_total_limit: 3
@@ -20,8 +20,9 @@ bf16: false
 tf32: true
 num_workers: 4
 persistent_workers: true
+prefetch_factor: 4
 length_bucketing: true
 length_bucket_multiplier: 50
 grad_clip: 1.0
 resume: false
-finetune_from_checkpoint: results/phoneme2mel/rope192_smallpostnet/AISHELL-2-95_5-pretrain/final
+finetune_from_checkpoint: results/phoneme2mel/rope192_smallpostnet_dropout05/AISHELL-2-95_5-pretrain/final
