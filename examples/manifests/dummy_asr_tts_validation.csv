@@ -1,0 +1,2 @@
+utt_id,speaker_id,source_wav,text
+dummy_validation_001,speaker_validation_a,placeholder/wav/dummy_validation_001.wav,dummy validation transcript

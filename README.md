@@ -30,6 +30,11 @@ prompt waveforms, pretrained model files, or adapted checkpoints are included.
 - `utils/WER`, `scripts/compute_cer.py`, `scripts/reproduce_tables.py`, and
   `utils/Naturalness/scripts`: evaluation wrappers for CER, edit rates,
   predicted quality, and table reproduction.
+- `scripts/prepare_asr_tts_manifests.py`, `scripts/train_wav2vec2_ctc.py`,
+  and `scripts/run_wav2vec2_ctc_cosyvoice2.py`: the dataset-adapted
+  Wav2Vec2-CTC plus CosyVoice2 ASR--TTS baseline.
+- `scripts/run_seed_vc_normal_ref.py`: the Seed-VC v2 normal-speaker
+  reference through an externally installed JSONL worker.
 
 ## Data Layout
 
@@ -105,6 +110,17 @@ python scripts/compute_cer.py \
   --hyp examples/results/hyp.kaldi.txt \
   --output results/eval/cer_edit_rates.csv
 ```
+
+## External Baselines
+
+The paper also evaluates a dataset-adapted Wav2Vec2-CTC plus CosyVoice2
+ASR--TTS baseline and a text-free Seed-VC v2 normal-speaker reference. These
+workflows require legally obtained audio, external public models, and a local
+C0 prompt pair. No baseline audio, prompt, checkpoint, or result is included.
+
+See `docs/external_baselines.md` for fixed dependency revisions, dummy
+manifest schemas, training and generation commands, the external Seed-VC
+worker protocol, and metric aggregation.
 
 Reproduce aggregate tables from prepared result files:
 

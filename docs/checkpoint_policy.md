@@ -14,9 +14,16 @@ This repository intentionally excludes:
 - generated reconstruction samples;
 - experiment logs and tracking artifacts.
 
+This also includes Wav2Vec2-CTC checkpoints produced by the ASR--TTS training
+workflow, local CosyVoice2 and Seed-VC model files, C0 prompt WAV/text pairs,
+and generated baseline manifests or metrics. The code records public model IDs
+and revisions in `docs/external_baselines.md`; users obtain and keep all model
+files and run outputs locally.
+
 Use placeholder paths such as `checkpoints/wav2phoneme/AISHELL2-FA` in configs.
 Before releasing any checkpoint, verify that the source dataset license and all
 third-party model licenses permit redistribution.
 
-CDSD-adapted checkpoints and CDSD-derived artifacts must be treated as
-restricted unless a separate license review explicitly permits release.
+Data-derived checkpoints and artifacts produced by any baseline workflow must
+remain outside this repository unless their redistribution has been reviewed
+separately.

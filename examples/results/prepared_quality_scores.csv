@@ -2,4 +2,5 @@ method,utmos,dnsmos
 original,3.100,3.000
 align_token_dsr,3.500,3.300
 mel_reference,3.400,3.250
-
+asr_tts_c0,3.900,3.200
+seed_vc_normal_ref,2.900,3.100

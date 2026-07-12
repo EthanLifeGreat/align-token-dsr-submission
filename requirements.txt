@@ -15,4 +15,5 @@ jiwer
 pypinyin
 datasets
 modelscope
-
+huggingface_hub
+onnxruntime
