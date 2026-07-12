@@ -23,6 +23,27 @@ data/<dataset>/wav/<spk_id>/<wav_id>.wav
 
 Raw speech data is not included.
 
+## External Baseline Manifests
+
+The ASR--TTS preparation script accepts three separate CSV manifests, one for
+each of train, validation, and test. Each input manifest uses this schema:
+
+```csv
+utt_id,speaker_id,source_wav,text
+dummy_train_001,speaker_train_a,/path/to/legal_audio.wav,dummy transcript
+```
+
+`utt_id` must be unique across all three splits. `speaker_id` must also be
+disjoint across the splits. The preparation step checks waveform existence and
+writes local normalized copies with `reference_text`, `normalized_text`, and
+`split` fields. Test text is retained only for later evaluation; it is never
+used as ASR--TTS synthesis input.
+
+The generated ASR--TTS manifest adds `asr_raw_text`, `asr_norm_text`,
+`generated_wav`, C0 prompt fields, `status`, and `error`. The Seed-VC manifest
+adds the normal target WAV, fixed conversion parameters, `status`, and `error`.
+These manifests are result artifacts and are not included in the repository.
+
 ## Dense Phoneme Frames
 
 Alignment-supervised frontend targets and outputs use one phoneme ID per frame:

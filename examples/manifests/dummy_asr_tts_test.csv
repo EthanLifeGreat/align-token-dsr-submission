@@ -1,0 +1,2 @@
+utt_id,speaker_id,source_wav,text
+dummy_test_001,speaker_test_a,placeholder/wav/dummy_test_001.wav,dummy evaluation transcript

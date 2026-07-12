@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 from pathlib import Path
 
 
@@ -42,6 +43,7 @@ def main() -> None:
     parser.add_argument("--ref", type=Path, required=True, help="Kaldi-style reference text: <utt_id> <text>")
     parser.add_argument("--hyp", type=Path, required=True, help="Kaldi-style hypothesis text: <utt_id> <text>")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--per-utt-output", type=Path, default=None, help="Optional per-utterance edit-count CSV.")
     args = parser.parse_args()
 
     ref_rows = _read_kaldi_text(args.ref)
@@ -51,6 +53,7 @@ def main() -> None:
         raise ValueError("no shared utterance ids between reference and hypothesis")
 
     total_n = total_s = total_d = total_i = 0
+    per_utt_rows = []
     for utt_id in shared:
         ref = ref_rows[utt_id]
         hyp = hyp_rows[utt_id]
@@ -59,6 +62,14 @@ def main() -> None:
         total_s += s
         total_d += d
         total_i += ins
+        per_utt_rows.append({
+            "utt_id": utt_id,
+            "N": len(ref),
+            "S": s,
+            "D": d,
+            "I": ins,
+            "CER": f"{(s + d + ins) / max(len(ref), 1):.6f}",
+        })
     cer = (total_s + total_d + total_i) / max(total_n, 1)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
@@ -68,8 +79,13 @@ def main() -> None:
         f"{total_d / max(total_n, 1):.6f},{total_i / max(total_n, 1):.6f}\n",
         encoding="utf-8",
     )
+    if args.per_utt_output is not None:
+        args.per_utt_output.parent.mkdir(parents=True, exist_ok=True)
+        with args.per_utt_output.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=["utt_id", "N", "S", "D", "I", "CER"])
+            writer.writeheader()
+            writer.writerows(per_utt_rows)
 
 
 if __name__ == "__main__":
     main()
-

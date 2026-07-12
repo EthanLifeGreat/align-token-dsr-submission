@@ -1,0 +1,2 @@
+utt_id,speaker_id,source_wav,text
+dummy_train_001,speaker_train_a,placeholder/wav/dummy_train_001.wav,dummy training transcript

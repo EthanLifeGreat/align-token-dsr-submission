@@ -2,3 +2,5 @@ method,similarity
 original,0.800
 align_token_dsr,0.760
 mel_reference,0.740
+asr_tts_c0,0.720
+seed_vc_normal_ref,0.530

@@ -2,4 +2,5 @@ method,N,S,D,I
 original,100,12,8,3
 align_token_dsr,100,6,4,2
 mel_reference,100,8,5,2
-
+asr_tts_c0,100,7,5,1
+seed_vc_normal_ref,100,14,9,4
